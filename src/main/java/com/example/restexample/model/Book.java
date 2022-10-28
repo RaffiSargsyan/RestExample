@@ -6,16 +6,27 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Entity
+@Table(name = "book")
 public class Book {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
-    private String authorName;
+    //    @JsonProperty("author_name")
+    private String description;
     private double price;
+    @Enumerated(EnumType.STRING)
     private BookLanguage language;
+
+    @ManyToOne
+    private Author author;
 
 }
